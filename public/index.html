@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>DOUBLE CROSS — Trust is a liability.</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/" class="brand"><b>◈</b> DOUBLE<span>CROSS</span></a>
+      <div id="connection">● CONNECTING</div>
+    </header>
+    <main>
+      <section id="welcome">
+        <div class="eyebrow">PRIVATE ROOMS / 2–4 RUNNERS / 180 SECONDS</div>
+        <div class="intro">
+          <div>
+            <h1>GOOD FRIENDS.<br />BAD <em>INTENTIONS.</em></h1>
+            <p class="lede">
+              Crack the vault. Take the cores.<br />Decide who gets out rich.
+            </p>
+          </div>
+          <div class="vault-art">
+            <div class="orbit"></div>
+            <div class="crystal">◈</div>
+            <span>VAULT 07 / SECURITY ACTIVE</span>
+          </div>
+        </div>
+        <div class="entry">
+          <label
+            >YOUR CALLSIGN<input
+              id="name"
+              maxlength="18"
+              placeholder="Runner"
+              autocomplete="nickname" /></label
+          ><button id="create">CREATE A ROOM <span>↗</span></button>
+          <div class="join">
+            <input
+              id="code"
+              maxlength="6"
+              placeholder="ROOM CODE"
+              aria-label="Room code"
+            /><button id="join">JOIN →</button>
+          </div>
+        </div>
+        <div class="rules">
+          <article>
+            <small>01 / TAKE</small>
+            <h3>Get your hands dirty.</h3>
+            <p>
+              Carry up to 4 cores. Press E to grab a nearby core or steal from a
+              loaded rival. Carrying slows you down.
+            </p>
+          </article>
+          <article>
+            <small>02 / BANK</small>
+            <h3>Make it out alive.</h3>
+            <p>
+              At a cyan extraction pad, press F and stay still for 3 seconds.
+              Each core banks 100. Drones stun you and spill your bag.
+            </p>
+          </article>
+          <article>
+            <small>03 / BETRAY</small>
+            <h3>Trust is a liability.</h3>
+            <p>
+              Once per match, Q triggers 15 seconds of Double Cross: extract for
+              2× value, but the countdown takes 4.5 seconds. Success ends your
+              run. Everyone sees your signal.
+            </p>
+          </article>
+        </div>
+        <div class="footnote">
+          WASD / ARROWS MOVE · E GRAB / STEAL · G DROP · F EXTRACT · Q DOUBLE
+          CROSS<br />Complete your private Contract for +300. Highest banked
+          score wins. Unbanked cores vanish at 0:00.
+        </div>
+      </section>
+      <section id="room" hidden>
+        <div class="room-bar">
+          <div>
+            <small>PRIVATE OPERATION</small>
+            <h2>
+              ROOM <span id="roomCode"></span>
+              <button id="copy" class="subtle">COPY</button>
+            </h2>
+          </div>
+          <div class="clock" id="timer">03:00</div>
+        </div>
+        <div id="lobby">
+          <h2>Assemble your crew.</h2>
+          <p>
+            Share this code with your friends. The host starts when 2–4 runners
+            have joined.
+          </p>
+          <div id="crew"></div>
+          <button id="start">START THE HEIST ↗</button>
+        </div>
+        <div id="play" hidden>
+          <div class="game-layout">
+            <div>
+              <div id="arena"></div>
+              <div class="controls">
+                <div class="dpad">
+                  <button data-move="0,-1">↑</button>
+                  <div>
+                    <button data-move="-1,0">←</button
+                    ><button data-move="0,1">↓</button
+                    ><button data-move="1,0">→</button>
+                  </div>
+                </div>
+                <div class="actions">
+                  <button data-action="grab">E <span>GRAB / STEAL</span></button
+                  ><button data-action="drop">G <span>DROP</span></button
+                  ><button data-action="extract">F <span>EXTRACT</span></button
+                  ><button data-action="cross" id="cross">
+                    Q <span>DOUBLE CROSS</span>
+                  </button>
+                </div>
+              </div>
+              <div id="feed"></div>
+            </div>
+            <aside>
+              <div class="card private">
+                <small>◈ YOUR PRIVATE CONTRACT</small>
+                <h3 id="contractTitle"></h3>
+                <p id="contract"></p>
+                <div id="contractProgress"></div>
+              </div>
+              <div class="card">
+                <small>YOUR TAKE</small>
+                <div class="take" id="take">0</div>
+                <div id="bag">BAG 0 / 4</div>
+                <div id="extraction"></div>
+              </div>
+              <div class="card">
+                <small>LIVE STANDINGS</small>
+                <div id="scores"></div>
+              </div>
+              <div class="hint">
+                Cyan rings are extraction zones.<br />Red drones spill your
+                bag.<br />Violet runners have Double Cross active.
+              </div>
+            </aside>
+          </div>
+        </div>
+        <div id="results" hidden>
+          <small>OPERATION COMPLETE</small>
+          <h1 id="winner"></h1>
+          <p>Banked credits decide the winner. Tied leaders share the win.</p>
+          <div id="finalScores"></div>
+          <button id="rematch">REMATCH ↻</button>
+        </div>
+      </section>
+      <div id="error" role="status" aria-live="polite"></div>
+    </main>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/vendor/phaser.js"></script>
+    <script src="client.js"></script>
+  </body>
+</html>
